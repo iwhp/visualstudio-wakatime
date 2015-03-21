@@ -5,6 +5,18 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WakaTime", "WakaTime.csproj", "{B05537E5-6B8D-419D-B470-B6FA57BB1C2E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weebree.VsEventLog", "Weebree.VsEventLog\Weebree.VsEventLog.csproj", "{DB49E491-9AF6-4C2F-A457-C60A3CCA8E07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weebree.VsEventLog_IntegrationTests", "Weebree.VsEventLog\Weebree.VsEventLog_IntegrationTests\Weebree.VsEventLog_IntegrationTests.csproj", "{7F784403-5987-46C2-9EC4-8DCF1050A161}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{34CC7970-FB89-4F75-B01F-54921BF5C660}"
+	ProjectSection(SolutionItems) = preProject
+		IntegrationTests.testsettings = IntegrationTests.testsettings
+		UnitTests.testsettings = UnitTests.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Weebree.VsEventLog_UnitTests", "Weebree.VsEventLog\Weebree.VsEventLog_UnitTests\Weebree.VsEventLog_UnitTests.csproj", "{42EC387C-C864-4751-920E-7DD627D33C25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,18 @@ Global
 		{B05537E5-6B8D-419D-B470-B6FA57BB1C2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B05537E5-6B8D-419D-B470-B6FA57BB1C2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B05537E5-6B8D-419D-B470-B6FA57BB1C2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB49E491-9AF6-4C2F-A457-C60A3CCA8E07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB49E491-9AF6-4C2F-A457-C60A3CCA8E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB49E491-9AF6-4C2F-A457-C60A3CCA8E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB49E491-9AF6-4C2F-A457-C60A3CCA8E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F784403-5987-46C2-9EC4-8DCF1050A161}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F784403-5987-46C2-9EC4-8DCF1050A161}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F784403-5987-46C2-9EC4-8DCF1050A161}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F784403-5987-46C2-9EC4-8DCF1050A161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42EC387C-C864-4751-920E-7DD627D33C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42EC387C-C864-4751-920E-7DD627D33C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42EC387C-C864-4751-920E-7DD627D33C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42EC387C-C864-4751-920E-7DD627D33C25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
