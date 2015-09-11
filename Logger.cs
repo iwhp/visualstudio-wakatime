@@ -1,40 +1,74 @@
 ﻿using System;
+using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using System.Globalization;
 
-namespace WakaTime.WakaTime {
-    /// <summary>
-    /// Singleton class for logging in Visula studio default logger file ActivityLog.xml
-    /// </summary>
-    class Logger {
-        private static Logger _instance;
-        private IVsActivityLog _log;
+namespace WakaTime
+{
+    internal enum LogLevel
+    {
+        Debug = 1,
+        Info,
+        Warning,
+        HandledException
+    };
 
-        public static Logger Instance {
-            get {
-                if (_instance == null) {
-                    _instance = new Logger();
-                }
-                return _instance;
-            }
+    static class Logger
+    {
+        private static IVsOutputWindowPane _wakatimeOutputWindowPane;
+
+        private static IVsOutputWindowPane WakatimeOutputWindowPane
+        {
+            get { return _wakatimeOutputWindowPane ?? (_wakatimeOutputWindowPane = GetWakatimeOutputWindowPane()); }
         }
 
-        public void initialize(IVsActivityLog log) {
-            _log = log;
+        private static IVsOutputWindowPane GetWakatimeOutputWindowPane()
+        {
+            var outputWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
+            if (outputWindow == null) return null;
+
+            var outputPaneGuid = new Guid(GuidList.GuidWakatimeOutputPane.ToByteArray());
+            IVsOutputWindowPane windowPane;
+
+            outputWindow.CreatePane(ref outputPaneGuid, "Wakatime", 1, 1);
+            outputWindow.GetPane(ref outputPaneGuid, out windowPane);
+
+            return windowPane;
         }
 
-        public void error(string message) {
-            _log.LogEntry((UInt32)__ACTIVITYLOG_ENTRYTYPE.ALE_ERROR,
-                           this.ToString(),
-                           string.Format(CultureInfo.CurrentCulture,
-                                        "{0}", message));
+        internal static void Debug(string message)
+        {
+            if (!WakaTimePackage.Debug)
+                return;
+
+            Log(LogLevel.Debug, message);
         }
 
-        public void info(string message) {
-            _log.LogEntry((UInt32)__ACTIVITYLOG_ENTRYTYPE.ALE_INFORMATION,
-                           this.ToString(),
-                           string.Format(CultureInfo.CurrentCulture,
-                                        "{0}", message));
+        internal static void Error(string message, Exception ex = null)
+        {
+            var exceptionMessage = string.Format("{0}: {1}", message, ex);
+
+            Log(LogLevel.HandledException, exceptionMessage);
+        }
+
+        internal static void Warning(string message)
+        {
+            Log(LogLevel.Warning, message);
+        }
+
+        internal static void Info(string message)
+        {
+            Log(LogLevel.Info, message);
+        }
+
+        private static void Log(LogLevel level, string message)
+        {
+            var outputWindowPane = WakatimeOutputWindowPane;
+            if (outputWindowPane == null) return;
+
+            var outputMessage = string.Format("[Wakatime {0} {1}] {2}{3}", Enum.GetName(level.GetType(), level),
+                DateTime.Now.ToString("hh:mm:ss tt"), message, Environment.NewLine);
+
+            outputWindowPane.OutputString(outputMessage);
         }
     }
 }
